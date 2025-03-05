@@ -19,7 +19,7 @@ const db = new sqlite3.Database("../database.sqlite", (err) => {
 // Get all doors
 app.get("/api/doors", (req, res) => {
   db.all(
-    "SELECT id, door_num AS name, room_name AS location FROM doors",
+    "SELECT doors.id, doors.door_num AS name, rooms.room_name AS location FROM doors JOIN rooms ON doors.room_id = rooms.id",
     [],
     (err, rows) => {
       if (err) {
